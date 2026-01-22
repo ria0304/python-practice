@@ -1,0 +1,38 @@
+
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        if not s:
+            return ""
+        
+        n = len(s)
+        max_len = 1
+        start = 0
+        
+        for i in range(n):
+            # Odd-length palindromes (center at i)
+            left = i
+            right = i
+            while left >= 0 and right < n and s[left] == s[right]:
+                left -= 1
+                right += 1
+            length = right - left - 1
+            if length > max_len:
+                max_len = length
+                start = left + 1
+            
+            # Even-length palindromes (center between i and i+1)
+            left = i
+            right = i + 1
+            while left >= 0 and right < n and s[left] == s[right]:
+                left -= 1
+                right += 1
+            length = right - left - 1
+            if length > max_len:
+                max_len = length
+                start = left + 1
+        
+        return s[start:start + max_len]
