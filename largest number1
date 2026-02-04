@@ -1,0 +1,24 @@
+import functools
+
+class Solution(object):
+    def largestNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: str
+        """
+        if not nums:
+            return ""
+        nums_str = [str(x) for x in nums]
+        def compare(a, b):
+            if a + b > b + a:
+                return -1
+            elif a + b < b + a:
+                return 1
+            else:
+                return 0
+        sorted_nums = sorted(nums_str, key=functools.cmp_to_key(compare))
+        result = ''.join(sorted_nums)
+        if result[0] == '0' and len(result) > 1:
+            return "0"
+        
+        return result
