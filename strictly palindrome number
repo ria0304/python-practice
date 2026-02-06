@@ -1,0 +1,16 @@
+class Solution(object):
+    def isStrictlyPalindromic(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        for i in range(2,n-1):
+            d=[]
+            temp=n
+            while  temp>0:
+                d.append(temp%i)
+                temp//=i
+            if(d!=d[::-1]):
+                return False
+        return True
+        
